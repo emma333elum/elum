@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Nexus Mobile - Premium Store & Trade-In</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Custom External Stylesheet -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-[#0b0f19] text-slate-100 min-h-screen flex flex-col pb-16 md:pb-0">
+
+  <!-- NOTIFICATION TOAST SYSTEM -->
+  <div id="toast-container" class="fixed top-4 right-4 z-50 flex flex-col gap-2 max-w-sm w-[90%] pointer-events-none"></div>
+
+  <!-- MAIN HEADER -->
+  <header class="glass-card sticky top-0 z-40 w-full px-4 py-3 md:px-8 flex justify-between items-center">
+    <div class="flex items-center gap-3">
+      <div class="bg-gradient-to-tr from-indigo-600 to-violet-500 p-2.5 rounded-2xl shadow-lg shadow-indigo-500/20">
+        <i data-lucide="smartphone" class="w-6 h-6 text-white"></i>
+      </div>
+      <div>
+        <h1 class="text-xl font-bold tracking-tight bg-gradient-to-r from-white via-slate-200 to-indigo-400 bg-clip-text text-transparent">NEXUS MOBILE</h1>
+        <p class="text-[10px] text-indigo-400 font-semibold tracking-wider uppercase">Premium Store & Trade</p>
+      </div>
+    </div>
+
+    <!-- Desktop Nav links -->
+    <nav class="hidden md:flex items-center gap-6">
+      <button onclick="switchTab('store')" id="nav-store" class="nav-btn text-indigo-400 font-semibold flex items-center gap-2 px-3 py-1.5 rounded-lg transition-all duration-300">
+        <i data-lucide="shopping-bag" class="w-4 h-4"></i> Store
+      </button>
+      <button onclick="switchTab('sell')" id="nav-sell" class="nav-btn text-slate-400 hover:text-white font-medium flex items-center gap-2 px-3 py-1.5 rounded-lg transition-all duration-300">
+        <i data-lucide="refresh-cw" class="w-4 h-4"></i> Sell & Trade-In
+      </button>
+      <button onclick="switchTab('listings')" id="nav-listings" class="nav-btn text-slate-400 hover:text-white font-medium flex items-center gap-2 px-3 py-1.5 rounded-lg transition-all duration-300">
+        <i data-lucide="clipboard-list" class="w-4 h-4"></i> My Listings
+      </button>
+      <button onclick="switchTab('cart')" id="nav-cart" class="nav-btn text-slate-400 hover:text-white font-medium flex items-center gap-2 px-3 py-1.5 rounded-lg transition-all duration-300 relative">
+        <i data-lucide="shopping-cart" class="w-4 h-4"></i> Cart
+        <span id="cart-badge-desktop" class="absolute -top-1.5 -right-2 bg-rose-500 text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center hidden">0</span>
+      </button>
+    </nav>
+
+    <div class="hidden lg:flex items-center gap-4 text-xs text-slate-400 border-l border-slate-800 pl-4">
+      <div class="flex items-center gap-1.5">
+        <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+        <span>Store Live Offer: Up to $850 Cash-back</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- APP CONTAINERS -->
+  <main class="flex-grow max-w-7xl w-full mx-auto px-4 py-6 md:px-8">
+
+    <!-- STORE TAB -->
+    <section id="tab-store" class="space-y-6">
+      <div class="relative overflow-hidden rounded-3xl bg-gradient-to-br from-indigo-950/80 via-slate-900 to-indigo-950/40 border border-indigo-500/20 p-6 md:p-10 flex flex-col md:flex-row justify-between items-center gap-6">
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,rgba(99,102,241,0.15),transparent_60%)]"></div>
+        <div class="space-y-4 max-w-lg relative z-10 text-center md:text-left">
+          <span class="bg-indigo-500/10 text-indigo-400 text-xs px-3 py-1 rounded-full border border-indigo-500/20 font-bold uppercase tracking-wider">Summer Launch Promo</span>
+          <h2 class="text-3xl md:text-4xl font-extrabold text-white leading-tight">Elevate Your Mobile World.</h2>
+          <p class="text-slate-300 text-sm md:text-base">Trade-in your old model and get up to <strong class="text-indigo-400">$850</strong> instant credit towards the brand new premium devices list below.</p>
+          <div class="flex flex-wrap gap-3 justify-center md:justify-start pt-2">
+            <button onclick="switchTab('sell')" class="bg-indigo-600 hover:bg-indigo-500 text-white px-5 py-2.5 rounded-xl font-semibold text-sm transition-all duration-300 flex items-center gap-2 shadow-lg shadow-indigo-600/30">
+              <i data-lucide="refresh-cw" class="w-4 h-4"></i> Estimate Trade-In
+            </button>
+            <a href="#store-inventory" class="border border-slate-700 hover:border-slate-500 text-slate-300 px-5 py-2.5 rounded-xl font-semibold text-sm transition-all duration-300">
+              Browse Devices
+            </a>
+          </div>
+        </div>
+        
+        <!-- Hero Graphics -->
+        <div class="relative w-48 h-48 md:w-60 md:h-60 flex items-center justify-center animate-pulse">
+          <svg viewBox="0 0 200 200" class="w-full h-full max-w-[200px]">
+            <defs>
+              <linearGradient id="screen-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#4f46e5" />
+                <stop offset="100%" stop-color="#ec4899" />
+              </linearGradient>
+            </defs>
+            <rect x="55" y="15" width="90" height="170" rx="18" fill="rgba(99,102,241,0.15)" filter="blur(10px)"/>
+            <rect x="50" y="10" width="100" height="180" rx="20" fill="#1e1b4b" stroke="#4f46e5" stroke-width="4"/>
+            <rect x="56" y="16" width="88" height="168" rx="15" fill="url(#screen-grad)"/>
+            <rect x="85" y="22" width="30" height="10" rx="5" fill="#090514"/>
+            <circle cx="100" cy="100" r="30" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="2" />
+            <path d="M70,160 Q100,130 130,160" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="3" stroke-linecap="round"/>
+          </svg>
+        </div>
+      </div>
+
+      <!-- Inventory Grid Filters -->
+      <div id="store-inventory" class="space-y-4 pt-4">
+        <div class="flex flex-col md:flex-row gap-3 items-center justify-between">
+          <h3 class="text-xl font-bold text-white flex items-center gap-2">
+            <i data-lucide="sparkles" class="w-5 h-5 text-indigo-400"></i> Featured Inventory
+          </h3>
+          <div class="w-full md:w-auto flex flex-wrap items-center gap-2">
+            <div class="relative flex-grow md:w-64">
+              <input type="text" id="search-input" oninput="applyFilters()" placeholder="Search phones..." class="w-full glass-input px-3.5 py-2 pl-9 rounded-xl text-xs text-white placeholder-slate-500 focus:outline-none">
+              <i data-lucide="search" class="w-4 h-4 text-slate-500 absolute left-3 top-2.5"></i>
+            </div>
+            <select id="brand-filter" onchange="applyFilters()" class="glass-input px-3 py-2 rounded-xl text-xs text-white focus:outline-none">
+              <option value="All">All Brands</option>
+              <option value="Apple">Apple</option>
+              <option value="Samsung">Samsung</option>
+              <option value="Google">Google</option>
+              <option value="OnePlus">OnePlus</option>
+            </select>
+            <select id="sort-filter" onchange="applyFilters()" class="glass-input px-3 py-2 rounded-xl text-xs text-white focus:outline-none">
+              <option value="popular">Most Popular</option>
+              <option value="price-asc">Price: Low to High</option>
+              <option value="price-desc">Price: High to Low</option>
+            </select>
+          </div>
+        </div>
+
+        <div id="inventory-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"></div>
+        <div id="no-products-view" class="hidden flex-col items-center justify-center py-16 text-center text-slate-500 space-y-3">
+          <i data-lucide="info" class="w-12 h-12 text-indigo-400"></i>
+          <p class="text-lg font-semibold">No devices found</p>
+          <p class="text-sm max-w-xs">Try resetting your brand filter and search terms.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SELL & TRADE-IN TAB -->
+    <section id="tab-sell" class="hidden space-y-6">
+      <div class="text-center max-w-xl mx-auto space-y-2">
+        <span class="bg-indigo-500/10 text-indigo-400 text-xs px-3 py-1 rounded-full border border-indigo-500/20 font-bold uppercase tracking-wider">Instant Quote Engine</span>
+        <h2 class="text-3xl font-extrabold text-white">Sell or Trade Your Device</h2>
+        <p class="text-slate-400 text-sm">Convert your unused smartphone into credit to spend inside our store, or list it on our community marketplace!</p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+        <div class="lg:col-span-7 glass-card p-6 rounded-3xl border border-slate-800 space-y-6">
+          <div class="flex items-center gap-3 border-b border-slate-800 pb-4">
+            <span class="bg-indigo-500 text-white w-7 h-7 rounded-full flex items-center justify-center font-bold text-sm">1</span>
+            <h3 class="font-bold text-lg text-white">Value Assessment Wizard</h3>
+          </div>
+
+          <div class="space-y-4">
+            <div>
+              <label class="block text-xs font-semibold uppercase text-slate-400 tracking-wider mb-2">Device Brand</label>
+              <div class="grid grid-cols-3 gap-2">
+                <button type="button" onclick="setWizardBrand('Apple')" class="wizard-brand-btn flex flex-col items-center justify-center p-3 rounded-xl border border-slate-800 hover:border-indigo-500/50 bg-[#0f1524] transition-all" id="btn-brand-apple">
+                  <i data-lucide="apple" class="w-6 h-6 text-slate-300 mb-1"></i>
+                  <span class="text-xs font-medium">Apple</span>
+                </button>
+                <button type="button" onclick="setWizardBrand('Samsung')" class="wizard-brand-btn flex flex-col items-center justify-center p-3 rounded-xl border border-slate-800 hover:border-indigo-500/50 bg-[#0f1524] transition-all" id="btn-brand-samsung">
+                  <i data-lucide="smartphone" class="w-6 h-6 text-slate-300 mb-1"></i>
+                  <span class="text-xs font-medium">Samsung</span>
+                </button>
+                <button type="button" onclick="setWizardBrand('Google')" class="wizard-brand-btn flex flex-col items-center justify-center p-3 rounded-xl border border-slate-800 hover:border-indigo-500/50 bg-[#0f1524] transition-all" id="btn-brand-google">
+                  <i data-lucide="chrome" class="w-6 h-6 text-slate-300 mb-1"></i>
+                  <span class="text-xs font-medium">Google</span>
+                </button>
+              </div>
+            </div>
+
+            <div>
+              <label for="wizard-model" class="block text-xs font-semibold uppercase text-slate-400 tracking-wider mb-2">Device Model</label>
+              <select id="wizard-model" onchange="recalculateOffer()" class="w-full glass-input px-3.5 py-3 rounded-xl text-sm text-white focus:outline-none"></select>
+            </div>
+
+            <div>
+              <label class="block text-xs font-semibold uppercase text-slate-400 tracking-wider mb-2">Storage Capacity</label>
+              <div class="grid grid-cols-4 gap-2">
+                <button type="button" onclick="setWizardStorage('64GB')" class="wizard-storage-btn py-2 px-1 rounded-lg border border-slate-800 text-xs text-slate-400 hover:border-indigo-500 transition-all bg-[#0f1524]" id="btn-storage-64gb">64 GB</button>
+                <button type="button" onclick="setWizardStorage('128GB')" class="wizard-storage-btn py-2 px-1 rounded-lg border border-slate-800 text-xs text-slate-400 hover:border-indigo-500 transition-all bg-[#0f1524]" id="btn-storage-128gb">128 GB</button>
+                <button type="button" onclick="setWizardStorage('256GB')" class="wizard-storage-btn py-2 px-1 rounded-lg border border-slate-800 text-xs text-slate-400 hover:border-indigo-500 transition-all bg-[#0f1524]" id="btn-storage-256gb">256 GB</button>
+                <button type="button" onclick="setWizardStorage('512GB')" class="wizard-storage-btn py-2 px-1 rounded-lg border border-slate-800 text-xs text-slate-400 hover:border-indigo-500 transition-all bg-[#0f1524]" id="btn-storage-512gb">512 GB</button>
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-xs font-semibold uppercase text-slate-400 tracking-wider mb-2">Cosmetic Condition</label>
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-2">
+                <button type="button" onclick="setWizardCondition('excellent')" class="wizard-condition-btn flex flex-col p-3 rounded-xl border border-slate-800 bg-[#0f1524] text-left transition-all" id="btn-cond-excellent">
+                  <span class="text-xs font-bold text-indigo-400">Flawless (9.5+)</span>
+                  <span class="text-[10px] text-slate-400 mt-1">Looks brand new, no visible scratches.</span>
+                </button>
+                <button type="button" onclick="setWizardCondition('good')" class="wizard-condition-btn flex flex-col p-3 rounded-xl border border-slate-800 bg-[#0f1524] text-left transition-all" id="btn-cond-good">
+                  <span class="text-xs font-bold text-slate-300">Light Wear (7-9)</span>
+                  <span class="text-[10px] text-slate-400 mt-1">Minor surface marks. Fully functional.</span>
+                </button>
+                <button type="button" onclick="setWizardCondition('fair')" class="wizard-condition-btn flex flex-col p-3 rounded-xl border border-slate-800 bg-[#0f1524] text-left transition-all" id="btn-cond-fair">
+                  <span class="text-xs font-bold text-amber-500">Heavily Used</span>
+                  <span class="text-[10px] text-slate-400 mt-1">Deep scratches, but working screen.</span>
+                </button>
+              </div>
+            </div>
+
+            <div>
+              <label for="wizard-notes" class="block text-xs font-semibold uppercase text-slate-400 tracking-wider mb-2">Additional Description</label>
+              <textarea id="wizard-notes" rows="2" placeholder="Tell us if it has packaging or any minor faults..." class="w-full glass-input p-3 rounded-xl text-xs text-white placeholder-slate-500 focus:outline-none"></textarea>
+            </div>
+          </div>
+        </div>
+
+        <!-- Payout Calculation Display -->
+        <div class="lg:col-span-5 glass-card p-6 rounded-3xl border border-slate-800 space-y-6 relative overflow-hidden">
+          <div class="flex items-center gap-3 border-b border-slate-800 pb-4">
+            <span class="bg-indigo-500 text-white w-7 h-7 rounded-full flex items-center justify-center font-bold text-sm">2</span>
+            <h3 class="font-bold text-lg text-white">Your Instant Quote</h3>
+          </div>
+
+          <div class="text-center py-6 bg-slate-950/40 rounded-2xl border border-slate-800/80">
+            <p class="text-xs text-slate-400 font-semibold uppercase tracking-widest">Calculated Valuation</p>
+            <p id="wizard-offer-price" class="text-5xl font-black text-indigo-400 mt-2">$0</p>
+            <p class="text-[10px] text-slate-500 mt-2">Locked in for 7 days with free shipping</p>
+          </div>
+
+          <div class="space-y-4">
+            <div class="text-xs text-slate-300 space-y-2 bg-[#0f1524] p-3 rounded-xl border border-slate-800">
+              <div class="flex justify-between">
+                <span>Selected Device:</span>
+                <strong id="summary-device-name" class="text-white">-</strong>
+              </div>
+              <div class="flex justify-between">
+                <span>Storage Spec:</span>
+                <strong id="summary-storage" class="text-white">-</strong>
+              </div>
+              <div class="flex justify-between">
+                <span>Declared Condition:</span>
+                <strong id="summary-condition" class="text-white uppercase">-</strong>
+              </div>
+            </div>
+
+            <div class="space-y-2">
+              <label class="block text-xs font-semibold uppercase text-slate-400 tracking-wider">How would you like to list / trade?</label>
+              <div class="grid grid-cols-2 gap-2">
+                <button type="button" onclick="setPayoutType('trade')" class="payout-type-btn p-3 rounded-xl border border-slate-800 bg-[#0f1524] flex flex-col items-center justify-center text-center transition-all" id="btn-payout-trade">
+                  <i data-lucide="tag" class="w-5 h-5 text-indigo-400 mb-1"></i>
+                  <span class="text-xs font-semibold text-white">Direct Trade Credit</span>
+                  <span class="text-[9px] text-slate-400 mt-0.5">+10% Bonus value applied</span>
+                </button>
+                <button type="button" onclick="setPayoutType('list')" class="payout-type-btn p-3 rounded-xl border border-slate-800 bg-[#0f1524] flex flex-col items-center justify-center text-center transition-all" id="btn-payout-list">
+                  <i data-lucide="coins" class="w-5 h-5 text-emerald-400 mb-1"></i>
+                  <span class="text-xs font-semibold text-white">List for Payout</span>
+                  <span class="text-[9px] text-slate-400 mt-0.5">Sell directly for cash</span>
+                </button>
+              </div>
+            </div>
+
+            <button onclick="submitTradeIn()" class="w-full bg-indigo-600 hover:bg-indigo-500 py-3 rounded-xl font-bold text-sm text-white transition-all shadow-lg shadow-indigo-600/20 flex items-center justify-center gap-2">
+              <i data-lucide="check-circle" class="w-4 h-4"></i> Lock Quote & Submit
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- USER LISTINGS TAB -->
+    <section id="tab-listings" class="hidden space-y-6">
+      <div class="flex items-center justify-between border-b border-slate-800 pb-4">
+        <div>
+          <h2 class="text-2xl font-bold text-white">My Sales & Trade-In Listings</h2>
+          <p class="text-xs text-slate-400">Track current valuations and devices you submitted.</p>
+        </div>
+        <button onclick="switchTab('sell')" class="bg-[#0f1524] border border-slate-800 hover:border-indigo-500/30 text-indigo-400 px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5">
+          <i data-lucide="plus" class="w-4 h-4"></i> Add New
+        </button>
+      </div>
+      <div id="listings-container" class="space-y-4"></div>
+    </section>
+
+    <!-- SHOPPING CART TAB -->
+    <section id="tab-cart" class="hidden space-y-6">
+      <h2 class="text-2xl font-bold text-white flex items-center gap-2">
+        <i data-lucide="shopping-cart" class="w-6 h-6 text-indigo-400"></i> Shopping Cart
+      </h2>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+        <div class="lg:col-span-8 space-y-4">
+          <div id="cart-items-wrapper" class="space-y-4"></div>
+          <div id="empty-cart-view" class="hidden flex-col items-center justify-center py-16 text-center text-slate-500 space-y-3">
+            <i data-lucide="shopping-cart" class="w-16 h-16 text-indigo-400"></i>
+            <p class="text-xl font-semibold">Your cart is empty</p>
+            <button onclick="switchTab('store')" class="bg-indigo-600 hover:bg-indigo-500 text-white px-5 py-2 rounded-xl text-xs font-semibold shadow-md">
+              Return to Store
+            </button>
+          </div>
+        </div>
+
+        <div id="cart-summary-card" class="lg:col-span-4 glass-card p-6 rounded
